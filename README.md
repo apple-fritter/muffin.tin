@@ -4,7 +4,7 @@ mffint is a bash script that uses a combination of built-in Unix commands (`cd`,
 ## How it works
 The script starts by changing to the home directory using the `cd` command.
 
-The script prompts the user for the path to the places file by using the read command to read user input and store it in the `PLACES_PATH` variable.
+The script prompts the user for the path to the places file by using the `read` command to read user input and store it in the `PLACES_PATH` variable.
 
 If the user didn't enter a path (i.e. they pressed [enter] without typing anything), the script uses the `find` command to search for the places file in the default Firefox profile directory. The `find` command searches the `~/.mozilla/firefox` directory for a directory that has a name that contains the string `.default`. The `head` command is then used to select only the first directory that matches the search pattern. This should be the default Firefox profile directory. The script then appends `/places.sqlite` to the directory path to get the full path to the places file.
 
