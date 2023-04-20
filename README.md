@@ -21,3 +21,7 @@ The `sqlite3` command outputs the table contents to an XML file with the same na
 * Backup: The script can be used to backup the bookmarks and other browsing history data stored in the Mozilla Firefox places file. By outputting the data to XML files, users can easily restore their bookmarks and browsing history in case of data loss or corruption.
 *  Analysis: Researchers or analysts may use the script to extract data from the places file and analyze it for various purposes. For example, they may want to analyze the browsing history of users to identify patterns or trends.
 * Integration: The script can be integrated into other scripts or programs that need to access the data stored in the Mozilla Firefox places file. By outputting the data in a standardized XML format, other programs can more easily read and process the data.
+
+## License
+
+This script is released under the [MIT License](LICENSE).
