@@ -1,5 +1,7 @@
 # muffin.tin
 muffin.tin is a bash script that uses a combination of built-in Unix commands (`cd`, `read`, `find`, `echo`, `for`, `head`, etc.) and external commands (`sqlite3`) to extract data from the Mozilla Firefox places file and output it to XML files.
+## a rusty muffin.tin
+Rust users might want to visit the ["other repository"](https://github.com/apple-fritter/muffin.tin.rusty).
 
 ## How it works
 The script starts by changing to the home directory using the `cd` command.
