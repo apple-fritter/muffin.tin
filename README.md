@@ -1,28 +1,61 @@
 # muffin.tin
-muffin.tin is a bash script that uses a combination of built-in Unix commands (`cd`, `read`, `find`, `echo`, `for`, `head`, etc.) and external commands (`sqlite3`) to extract data from the Mozilla Firefox places file and output it to XML files.
-## a rusty muffin.tin
-Rust users might want to visit the ["other repository"](https://github.com/apple-fritter/muffin.tin.rusty).
 
-## How it works
-The script starts by changing to the home directory using the `cd` command.
+![SQLite Logo](https://www.sqlite.org/images/sqlite370_banner.gif)
 
-The script prompts the user for the path to the places file by using the `read` command to read user input and store it in the `PLACES_PATH` variable.
+## Overview
 
-If the user didn't enter a path (i.e. they pressed [enter] without typing anything), the script uses the `find` command to search for the places file in the default Firefox profile directory. The `find` command searches the `~/.mozilla/firefox` directory for a directory that has a name that contains the string `.default`. The `head` command is then used to select only the first directory that matches the search pattern. This should be the default Firefox profile directory. The script then appends `/places.sqlite` to the directory path to get the full path to the places file.
+This project aims to provide a convenient way to peek into the Firefox `places.sqlite` database and export its data into XML files. The `places.sqlite` database is a critical component of Mozilla Firefox, responsible for storing browsing history, bookmarks, and other user-related information.
 
-The script then uses the `sqlite3` command to get a list of all the tables in the database. The `.tables` command is executed as an argument to `sqlite3` to get a list of all the tables in the database.
+By extracting the data into XML format, it becomes more accessible and can be used for various purposes, such as data analysis, reporting, data migration, and integration with other systems.
 
-The script then uses the `echo` command to output the SQLite `.mode` command with the `xml` argument. This sets the output mode to XML.
+## Getting Started
 
-The script then uses a `for` loop to loop over each table in the database. For each table, the script uses the `echo` command to output the SQLite `.output` command with the name of the XML file to output the table contents to. The script then uses the `echo` command to output a `SELECT * FROM` command with the name of the table to select all the rows from the table. These commands are piped into the `sqlite3` command as a single string to execute them all at once.
+### Prerequisites
 
-The `sqlite3` command outputs the table contents to an XML file with the same name as the table. The XML files are saved in the same directory as the places file.
+- Python 3: Ensure that you have Python 3 installed on your system. You can download it from the official Python website: [python.org](https://www.python.org/downloads/).
 
-## Potential use cases for this script
+### Installation
 
-* Backup: The script can be used to backup the bookmarks and other browsing history data stored in the Mozilla Firefox places file. By outputting the data to XML files, users can easily restore their bookmarks and browsing history in case of data loss or corruption.
-*  Analysis: Researchers or analysts may use the script to extract data from the places file and analyze it for various purposes. For example, they may want to analyze the browsing history of users to identify patterns or trends.
-* Integration: The script can be integrated into other scripts or programs that need to access the data stored in the Mozilla Firefox places file. By outputting the data in a standardized XML format, other programs can more easily read and process the data.
+1. Clone this repository to your local machine.
+
+```bash
+git clone https://github.com/apple-fritter/muffin.tin.git
+cd miffin.tin
+```
+## Usage
+
+1. Make a copy of your Firefox profile's `places.sqlite` and place it in the project directory.
+- Optionally, define the path in the script.
+2. Execute the bash script places.sh to export the data into XML files.
+
+```bash
+./places.sh
+```
+
+> The script will create a new folder in your home directory, named places_tables_YYYYMMDDHHMMSS, where YYYYMMDDHHMMSS represents the current timestamp. The data from each table in the places.sqlite database will be exported as XML files within this folder.
+
+## How is this Useful?
+### 1. Data Analysis
+The extracted XML files provide structured data that can be easily analyzed using various tools and libraries. Researchers and data analysts can gain insights into browsing patterns, popular websites, and user behavior.
+### 2. Reporting
+With the data available in XML format, it can be easily processed to generate customized reports, statistics, and visualizations. This can be valuable for website owners, marketers, and analysts to understand user engagement and improve their web presence.
+### 3. Data Migration
+XML is a common data interchange format. Extracting data from the SQLite database to XML enables smooth data migration between different systems and applications.
+### 4. Integration with Other Systems
+The XML format is widely supported across different programming languages and platforms. The extracted data can be easily integrated into other applications or databases for further processing and utilization.
+Note
+
+## Considerations
+
+#### Database Locking:
+If the places.sqlite database is locked by another process, you may encounter errors. Make sure Firefox is closed or not accessing the database while running the script.
+
+#### Backup:
+Always back up your original places.sqlite database before running any scripts that interact with it, to avoid data loss or corruption.
+
+## Contributing
+
+Contributions are welcome! If you have any improvements, bug fixes, or feature suggestions, please feel free to open an issue or submit a pull request.
 
 ## [Disclaimer](DISCLAIMER)
 **This software is provided "as is" and without warranty of any kind**, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement. In no event shall the authors or copyright holders be liable for any claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the software or the use or other dealings in the software.
